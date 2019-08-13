@@ -1,0 +1,27 @@
+<form #f="ngForm">
+    <div ngModelGroup="assign">
+        <div class="form-group">
+            <label for="course">Course</label>
+            <input required minlength="3" ngModel name="course" type="text" #c="ngModel" (change)="log(c)" class="form-control">
+            <div *ngIf=" c.touched && !c.valid" class="alert alert-danger">
+                <div *ngIf="c.errors.required"> Course Name is required.</div>
+                <div *ngIf="c.errors.minlength"> Input should be 5 charcaters.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select required ngModel name="category" id="" class="form-control">
+                        <option *ngFor="let option of categories" [value]=option.id> {{option.name}}</option>
+                </select>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" ngModel name="hasSubscription" id="">
+            <label for="moneyBack">30-day-money back guarantee</label>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Create</button>
+    <p>{{f.value|json}}</p>
+</form>
